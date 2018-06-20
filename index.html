@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="css/style.css">
   <title>LoopLAB Project</title>
 </head>
-<body>
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+<body data-spy="scroll" data-target="#main-nav" id="home">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" id="main-nav">
     <div class="container">
       <a href="index.html" class="navbar-brand">LoopLAB</a>
       <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -284,6 +284,29 @@
   <script>
     //get the current year for the copyright
     $('#year').text(new Date(). getFullYear());
+
+    // Init Scrollspy
+    $('body').scrollspy({targer: '#main-nav'});
+
+    //add smooth scrolling
+    $('#main-nav a').on('click', function(e) {
+      //check for a hash value
+      if(this.hash !== '') {
+        //prevent the default behavior
+        e.preventDefault();
+
+        //store hash
+        const hash = this.hash;
+
+        //animate smooth scroll
+        $('html, body').animate({
+          scrollTop: $(hash).offset().top
+        }, 900, function() {
+          //add hash to URL after the scrool
+          window.location.hash = hash;
+        });
+      }
+    })
   </script>
 </body>
 </html>
